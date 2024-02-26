@@ -154,6 +154,11 @@ namespace YAFC {
                 }
 
                 gui.textColor = recipe.hierarchyEnabled ? SchemeColor.BackgroundText : SchemeColor.BackgroundTextFaint;
+
+                if (view.flatHierarchyBuilder.nextRowIsGreyedOut) {
+                    gui.textColor = SchemeColor.GreyedOutText;
+                }
+
                 gui.BuildText(recipe.recipe.locName, wrap: true);
             }
 
@@ -838,9 +843,19 @@ goodsHaveNoProduction:;
         }
 
         private void BuildGoodsIcon(ImGui gui, Goods goods, ProductionLink link, float amount, ProductDropdownType dropdownType, RecipeRow recipe, ProductionTable context, Goods[] variants = null) {
+<<<<<<< HEAD
             bool linkIsError = link != null && ((link.flags & (ProductionLink.Flags.HasProductionAndConsumption | ProductionLink.Flags.LinkRecursiveNotMatched | ProductionLink.Flags.ChildNotMatched)) != ProductionLink.Flags.HasProductionAndConsumption);
             bool linkIsForeign = link != null && link.owner != context;
             if (gui.BuildFactorioObjectWithAmount(goods, amount, goods?.flowUnitOfMeasure ?? UnitOfMeasure.None, link != null ? linkIsError ? SchemeColor.Error : linkIsForeign ? SchemeColor.Secondary : SchemeColor.Primary : goods.IsSourceResource() ? SchemeColor.Green : SchemeColor.None)) {
+=======
+            var linkIsError = link != null && ((link.flags & (ProductionLink.Flags.HasProductionAndConsumption | ProductionLink.Flags.LinkRecursiveNotMatched | ProductionLink.Flags.ChildNotMatched)) != ProductionLink.Flags.HasProductionAndConsumption);
+            var linkIsForeign = link != null && link.owner != context;
+
+            SchemeColor bgColor = link != null ? linkIsError ? SchemeColor.Error : linkIsForeign ? SchemeColor.Secondary : SchemeColor.Primary : goods.IsSourceResource() ? SchemeColor.Green : SchemeColor.None;
+            SchemeColor textColor = flatHierarchyBuilder.nextRowIsGreyedOut ? SchemeColor.GreyedOutText : SchemeColor.None;
+
+            if (gui.BuildFactorioObjectWithAmount(goods, amount, goods?.flowUnitOfMeasure ?? UnitOfMeasure.None, bgColor, textColor)) {
+>>>>>>> 6f2688c (Checking a row with the green check mark greys out that row and all children)
                 OpenProductDropdown(gui, gui.lastRect, goods, amount, link, dropdownType, recipe, context, variants);
             }
         }

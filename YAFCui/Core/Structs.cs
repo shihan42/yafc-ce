@@ -39,7 +39,10 @@
         Green,
         GreenAlt,
         GreenText,
-        GreenTextFaint
+        GreenTextFaint,
+        // Custom colors
+        GreyedOutBackground,
+        GreyedOutText
     }
 
     public enum RectangleBorder {
