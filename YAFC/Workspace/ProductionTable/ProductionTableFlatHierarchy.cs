@@ -144,6 +144,8 @@ namespace YAFC {
                         }
 
                         if (nextRowIsGreyedOut) {
+                            rect.X += depWidth;
+                            rect.Width -= depWidth;
                             gui.DrawRectangle(rect, SchemeColor.GreyedOutBackground);
                         }
                     }
